@@ -30,16 +30,11 @@
 			}
 
 			$body .= "<table>\n";
-			$body .= "<tr><th>delete</th><th>edit</th>";
+			$body .= "<tr><th>delete</th><th>edit</th><th>completed</th>";
 
-			$columns = array(array('name' => 'title', 'label' => 'Title'),
-							 array('name' => 'MPAA', 'label' => 'Rating'),
-							 array('name' => 'genre', 'label' => 'Genre'),
-							 array('name' => 'releaseYear', 'label' => 'Release Year'),
-							 array('name' => 'director', 'label' => 'Director'),
-							 array('name' => 'actors', 'label' => 'Actor(s)'),
-							 array('name' => 'summary', 'label' => 'Summary'),
-								);
+			$columns = array(array('name' => 'title', 'label' => 'title'),
+							 array('name' => 'summary', 'label' => 'summary'),
+							 array('name' => 'genre', 'label' => 'genre'));
 
 			// geometric shapes in unicode
 			// http://jrgraphix.net/r/Unicode/25A0-25FF
@@ -61,15 +56,11 @@
 				$title = $movie['title'];
 				$summary = ($movie['summary']) ? $movie['summary'] : '';
 				$genre = $movie['genre'];
-				$rating = $movie['MPAA'];
-				$director = $movie['director'];
-				$actors = $movie['actors'];
-				$releaseYear = $movie['releaseYear'];
 
 				$body .= "<tr>";
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
-				$body .= "<td>$title</td><td>$rating</td><td>$genre</td><td>$releaseYear</td><td>$director</td><td>$actors</td><td>$summary</td>";
+				$body .= "<td>$title</td><td>$summary</td><td>$genre</td>";
 				$body .= "</tr>\n";
 			}
 			$body .= "</table>\n";
@@ -107,7 +98,7 @@
 			}
 
 			$body .= <<<EOT2
-  <p>Category<br />
+  <p>Genre<br />
   <select name="genre">
 	  <option value="Action" {$selected['Action']}>Action</option>
 	  <option value="Comedy" {$selected['Comedy']}>Comedy</option>
@@ -119,11 +110,22 @@
   </select>
   </p>
 
+	<p>Rating<br />
+	<select name="genre">
+		<option value="G" {$selected['G']}>G</option>
+		<option value="PG" {$selected['PG']}>PG</option>
+		<option value="PG-13" {$selected['PG-13']}>PG-13</option>
+		<option value="R" {$selected['R']}>R</option>
+		<option value="Not Rated" {$selected['Not Rated']}>Not Rated</option>
+	</select>
+	</p>
   <p>Title<br />
   <input type="text" name="title" value="$title" placeholder="title" maxlength="255" size="80"></p>
 
-  <p>Description<br />
+  <p>Summary<br />
   <textarea name="summary" rows="6" cols="80" placeholder="summary">$summary</textarea></p>
+
+
   <input type="submit" name='submit' value="Submit"> <input type="submit" name='cancel' value="Cancel">
 </form>
 EOT2;
