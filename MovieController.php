@@ -16,11 +16,13 @@
 		private $message = '';
 		private $data = array();
 
+
 		public function __construct() {
 			$this->model = new MovieModel();
 			$this->views = new MovieViews();
 
 			$this->view = $_GET['view'] ? $_GET['view'] : 'movielist';
+			// $this->view = $_GET['log'] ? $_GET['log'] : 'loginForm';
 			$this->action = $_POST['action'];
 		}
 
@@ -58,16 +60,29 @@
 					$this->handleUpdateMovie();
 					break;
 				default:
-					$this->verifyLogin();
+			 $this->defaultUserLogIn();
 			}
 
 			switch($this->view) {
+
 				case 'loginform':
 					print $this->views->loginFormView($this->data, $this->message);
 					break;
 				case 'movieform':
 					print $this->views->movieFormView($this->model->getUser(), $this->data, $this->message);
 					break;
+
+					case 'defaultLogIn':
+
+					list($orderBy, $orderDirection) = $this->model->getOrdering();
+					list($movies, $error) = $this->model->getAllMovies();
+					if ($error) {
+						$this->message = $error;
+					}
+					print $this->views->defaultMovieListView( $movies, $orderBy, $orderDirection, $this->message);
+					 break;
+
+
 				default: // 'movielist'
 					list($orderBy, $orderDirection) = $this->model->getOrdering();
 					list($movies, $error) = $this->model->getMovies();
@@ -78,6 +93,17 @@
 			}
 
 		}
+
+
+		private function defaultUserLogIn() {
+			if (( $this->view == 'movielist') && (! $this->model->getUser())) {
+				$this->view = 'defaultLogIn';
+				return false;
+			} else {
+				return true;
+			}
+		}
+
 
 		private function verifyLogin() {
 			if (! $this->model->getUser()) {

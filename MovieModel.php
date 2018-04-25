@@ -100,6 +100,46 @@
 			return array($this->orderBy, $this->orderDirection);
 		}
 
+
+
+
+		public function getAllMovies() {
+			$this->error = '';
+			$movies = array();
+
+
+			if (! $this->mysqli) {
+				$this->error = "No connection to database.";
+				return array($movies, $this->error);
+			}
+
+			$orderByEscaped = $this->mysqli->real_escape_string($this->orderBy);
+			$orderDirectionEscaped = $this->mysqli->real_escape_string($this->orderDirection);
+
+
+			$stmt = $this->mysqli->prepare("SELECT * FROM movies ORDER BY $orderByEscaped $orderDirectionEscaped");
+
+			if (! $stmt->execute() ) {
+				$this->error = "Execute of statement failed: " . $stmt->error;
+				return array($movies, $this->error);
+			}
+			if (! ($result = $stmt->get_result()) ) {
+				$this->error = "Getting result failed: " . $stmt->error;
+				return array($movies, $this->error);
+			}
+			if ($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) {
+					array_push($movies, $row);
+				}
+			}
+
+			$stmt->close();
+
+			return array($movies, $this->error);
+		}
+
+
+
 		public function getMovies() {
 			$this->error = '';
 			$movies = array();
@@ -118,13 +158,16 @@
 			$orderDirectionEscaped = $this->mysqli->real_escape_string($this->orderDirection);
 
 
-			//Bomb
+if($this->user->loginID == admin){
+
+			$stmt = $this->mysqli->prepare("SELECT * FROM movies ORDER BY $orderByEscaped $orderDirectionEscaped");
+		}else{
 			$stmt = $this->mysqli->prepare("SELECT * FROM movies WHERE userID = ? ORDER BY $orderByEscaped $orderDirectionEscaped");
 
 			if (! ($stmt->bind_param("i", $this->user->userID)) ) {
 				$this->error = "Prepare failed: " . $this->mysqli->error;
 				return array($movies, $this->error);
-			}
+			}}
 			if (! $stmt->execute() ) {
 				$this->error = "Execute of statement failed: " . $stmt->error;
 				return array($movies, $this->error);
@@ -162,13 +205,17 @@
 				$this->error = "No id specified for movie to retrieve.";
 				return array($movie, $this->error);
 			}
+      if($this->user->loginID == admin){
 
+
+				$stmt = $this->mysqli->prepare("SELECT * FROM movies WHERE id = $id" );
+			}else{
 			$stmt = $this->mysqli->prepare("SELECT * FROM movies WHERE userID = ? AND id = ?");
 
 			if (! ($stmt->bind_param("ii", $this->user->userID, $id)) ) {
 				$this->error = "Prepare failed: " . $this->mysqli->error;
 				return array($movie, $this->error);
-			}
+			}}
 			if (! $stmt->execute() ) {
 				$this->error = "Execute of statement failed: " . $stmt->error;
 				return array($movie, $this->error);
@@ -249,16 +296,23 @@
 				$this->error = "No title found for movie to update. A title is required.";
 				return $this->error;
 			}
-
+			
 			$summary = $data['summary'];
 			$genre = $data['genre'];
 
-			$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, genre=? WHERE userID = ? AND id = ?");
+			  if($this->user->loginID == admin){
+					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, genre=?  WHERE  id = ?");
 
-			if (! ($stmt->bind_param("sssii", $title, $summary, $genre, $this->user->userID, $id)) ) {
-				$this->error = "Prepare failed: " . $this->mysqli->error;
-				return $this->error;
-			}
+				if (! ($stmt->bind_param("sssi", $title, $summary, $genre, $id)) ) {
+							$this->error = "Prepare failed: " . $this->mysqli->error;
+							return $this->error;}
+				}else{
+					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, genre=? WHERE userID = ? AND id = ?");
+
+				if (! ($stmt->bind_param("sssii", $title, $summary, $genre, $this->user->userID, $id)) ) {
+							$this->error = "Prepare failed: " . $this->mysqli->error;
+							return $this->error;
+			}}
 
 			//Maybe remove this
 			if (! $stmt->execute() ) {
@@ -288,12 +342,14 @@
 				$this->error = "No id specified for movie to delete.";
 				return $this->error;
 			}
-
+        if($this->user->loginID == admin){
+					$stmt = $this->mysqli->prepare("DELETE FROM movies WHERE id = $id");
+				}else{
 			$stmt = $this->mysqli->prepare("DELETE FROM movies WHERE userID = ? AND id = ?");
 
 			if (! ($stmt->bind_param("ii", $this->user->userID, $id)) ) {
 				$this->error = "Prepare failed: " . $this->mysqli->error;
-				return $this->error;
+				return $this->error;}
 			}
 			if (! $stmt->execute() ) {
 				$this->error = "Execute of statement failed: " . $stmt->error;

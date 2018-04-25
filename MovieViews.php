@@ -77,6 +77,70 @@
 			return $this->page($body);
 		}
 
+		public function defaultMovieListView($movies, $orderBy = 'title', $orderDirection = 'asc', $message = '') {
+			$body = "<h1>Movies for </h1>\n";
+
+			if ($message) {
+				$body .= "<p class='message'>$message</p>\n";
+			}
+
+			$body .= "<p> <a class='movieButton' href='index.php?view=loginform'>Log In</a></p>\n";
+
+			if (count($movies) < 1) {
+				$body .= "<p>No movies to display!</p>\n";
+				return $this->page($body);
+			}
+
+			$body .= "<table>\n<tr>";
+			// $body .= "<tr><th>delete</th><th>edit</th>";
+
+			$columns = array(array('name' => 'title', 'label' => 'Title'),
+							 array('name' => 'MPAA', 'label' => 'Rating'),
+							 array('name' => 'genre', 'label' => 'Genre'),
+							 array('name' => 'releaseYear', 'label' => 'Release Year'),
+							 array('name' => 'director', 'label' => 'Director'),
+							 array('name' => 'actors', 'label' => 'Actor(s)'),
+							 array('name' => 'summary', 'label' => 'Summary'),
+								);
+
+			// geometric shapes in unicode
+			// http://jrgraphix.net/r/Unicode/25A0-25FF
+			foreach ($columns as $column) {
+				$name = $column['name'];
+				$label = $column['label'];
+				if ($name == $orderBy) {
+					if ($orderDirection == 'asc') {
+						$label .= " &#x25BC;";  // ▼
+					} else {
+						$label .= " &#x25B2;";  // ▲
+					}
+				}
+				$body .= "<th><a class='order' href='index.php?orderby=$name'>$label</a></th>";
+			}
+
+			foreach ($movies as $movie) {
+				$id = $movie['id'];
+				$title = $movie['title'];
+				$summary = ($movie['summary']) ? $movie['summary'] : '';
+				$genre = $movie['genre'];
+				$rating = $movie['MPAA'];
+				$director = $movie['director'];
+				$actors = $movie['actors'];
+				$releaseYear = $movie['releaseYear'];
+
+				$body .= "<tr>";
+				// $body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
+				// $body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
+				$body .= "<td>$title</td><td>$rating</td><td>$genre</td><td>$releaseYear</td><td>$director</td><td>$actors</td><td>$summary</td>";
+				$body .= "</tr>\n";
+			}
+			$body .= "</table>\n";
+
+			return $this->page($body);
+		}
+
+
+
 		public function movieFormView($user, $data = null, $message = '') {
 			$genre = '';
 			$title = '';
