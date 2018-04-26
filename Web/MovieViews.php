@@ -16,7 +16,11 @@
 		}
 
 		public function movieListView($user, $movies, $orderBy = 'title', $orderDirection = 'asc', $message = '') {
-			$body = "<h1>Movies for {$user->firstName} {$user->lastName}</h1>\n";
+			if ($user->firstName != "" && $user->firstName != NULL) {
+				$body = "<h1>Tiger Movie Browser for {$user->firstName} {$user->lastName}</h1>\n";
+			} else {
+				$body = "<h1>Tigers Movie Browser";
+			}
 
 			if ($message) {
 				$body .= "<p class='message'>$message</p>\n";

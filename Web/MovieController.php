@@ -71,18 +71,14 @@
 				case 'movieform':
 					print $this->views->movieFormView($this->model->getUser(), $this->data, $this->message);
 					break;
-
-					case 'defaultLogIn':
-
+				case 'defaultLogIn':
 					list($orderBy, $orderDirection) = $this->model->getOrdering();
 					list($movies, $error) = $this->model->getAllMovies();
 					if ($error) {
 						$this->message = $error;
 					}
 					print $this->views->defaultMovieListView( $movies, $orderBy, $orderDirection, $this->message);
-					 break;
-
-
+					break;
 				default: // 'movielist'
 					list($orderBy, $orderDirection) = $this->model->getOrdering();
 					list($movies, $error) = $this->model->getMovies();
@@ -94,7 +90,6 @@
 
 		}
 
-
 		private function defaultUserLogIn() {
 			if (( $this->view == 'movielist') && (! $this->model->getUser())) {
 				$this->view = 'defaultLogIn';
@@ -103,7 +98,6 @@
 				return true;
 			}
 		}
-
 
 		private function verifyLogin() {
 			if (! $this->model->getUser()) {
