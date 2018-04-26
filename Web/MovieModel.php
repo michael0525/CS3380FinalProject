@@ -278,7 +278,7 @@ if($this->user->loginID == admin){
 				return $this->error;
 			}
 
-			$stmt = $this->mysqli->prepare("INSERT INTO movies (title, summary, MPAA, actors, director, releaseYear, genre, userID) VALUES (?, ?, ?, ?)");
+			$stmt = $this->mysqli->prepare("INSERT INTO movies (title, summary, MPAA, actors, director, releaseYear, genre, userID) VALUES (?, ?, ?, ?,?, ?, ?, ?)");
 
 			if (! ($stmt->bind_param("sssssisi", $title, $summary, $MPAA, $actors, $director, $releaseYear, $genre, $this->user->userID)) ) {
 				$this->error = "Prepare failed: " . $this->mysqli->error;
