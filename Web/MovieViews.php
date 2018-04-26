@@ -183,7 +183,21 @@
 			}
 
 			$body .= <<<EOT2
-  <p>Category<br />
+
+	<p>Title<br />
+	<input type="text" name="title" value="$title" placeholder="title" maxlength="255" size="80"></p>
+
+	<p>Rating<br />
+	<select name="rating">
+		<option value="G" {$selected['G']}>G</option>
+		<option value="PG" {$selected['PG']}>PG</option>
+		<option value="PG-13" {$selected['PG-13']}>PG-13</option>
+		<option value="R" {$selected['R']}>R</option>
+		<option value="NC-17" {$selected['NC-17']}>NC-17</option>
+	</select>
+	</p>
+
+  <p>Genre<br />
   <select name="genre">
 	  <option value="Action" {$selected['Action']}>Action</option>
 	  <option value="Comedy" {$selected['Comedy']}>Comedy</option>
@@ -195,11 +209,18 @@
   </select>
   </p>
 
-  <p>Title<br />
-  <input type="text" name="title" value="$title" placeholder="title" maxlength="255" size="80"></p>
+	<p>Release Year<br />
+	<input type="text" name="releaseYear" value="$releaseYear" placeholder ="release year" maxlength="255" size="20"></p>
 
-  <p>Description<br />
+	<p>Director<br />
+	<input type="text" name="director" value="$director" placeholder ="director" maxlength="255" size="80"></p>
+
+	<p>Actor(s)<br />
+	<input type="text" name="actors" value="$actors" placeholder ="actor(s)" maxlength="255" size="80"></p>
+
+  <p>Summary<br />
   <textarea name="summary" rows="6" cols="80" placeholder="summary">$summary</textarea></p>
+
   <input type="submit" name='submit' value="Submit"> <input type="submit" name='cancel' value="Cancel">
 </form>
 EOT2;
