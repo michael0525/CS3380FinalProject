@@ -19,7 +19,7 @@
 			if ($user->firstName != "" && $user->firstName != NULL) {
 				$body = "<h1>Tiger Movie Browser for {$user->firstName} {$user->lastName}</h1>\n";
 			} else {
-				$body = "<h1>Tigers Movie Browser";
+				$body = "<h1>Tigers Movie Browser</h1>\n";
 			}
 
 			if ($message) {
@@ -82,7 +82,11 @@
 		}
 
 		public function defaultMovieListView($movies, $orderBy = 'title', $orderDirection = 'asc', $message = '') {
-			$body = "<h1>Movies for </h1>\n";
+			if ($user->firstName != "" && $user->firstName != NULL) {
+				$body = "<h1>Tiger Movie Browser for {$user->firstName} {$user->lastName}</h1>\n";
+			} else {
+				$body = "<h1>Tigers Movie Browser</h1>\n";
+			}
 
 			if ($message) {
 				$body .= "<p class='message'>$message</p>\n";
@@ -159,7 +163,11 @@
 				$selected['uncategorized'] = 'selected';
 			}
 
-			$body = "<h1>Movies for {$user->firstName} {$user->lastName}</h1>\n";
+			if ($user->firstName != "" && $user->firstName != NULL) {
+				$body = "<h1>Tiger Movie Browser for {$user->firstName} {$user->lastName}</h1>\n";
+			} else {
+				$body = "<h1>Tigers Movie Browser</h1>\n";
+			}
 
 			if ($message) {
 				$body .= "<p class='message'>$message</p>\n";
