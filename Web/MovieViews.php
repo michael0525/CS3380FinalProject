@@ -157,7 +157,7 @@
 			$director = '';
 			$actor = '';
 			$summary = '';
-			$selectedRating = array('G' => '', 'PG' => '', 'PG-13' => '', 'R' => '', 'NC-17' => '');
+			$selectedRating = array('not rated' => '','G' => '', 'PG' => '', 'PG-13' => '', 'R' => '', 'NC-17' => '');
 			$selectedGenre = array('Action' => '', 'Comedy' => '', 'Drama' => '', 'Horror' => '', 'SciFi' => '', 'Western' => '', 'uncategorized' => '');
 			if ($data) {
 				$title = $data['title'];
