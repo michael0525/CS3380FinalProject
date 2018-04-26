@@ -278,9 +278,9 @@ if($this->user->loginID == admin){
 				return $this->error;
 			}
 
-			$stmt = $this->mysqli->prepare("INSERT INTO movies (title, summary, genre, userID) VALUES (?, ?, ?, ?)");
+			$stmt = $this->mysqli->prepare("INSERT INTO movies (title, summary, MPAA, actors, director, releaseYear, genre, userID) VALUES (?, ?, ?, ?)");
 
-			if (! ($stmt->bind_param("sssi", $title, $summary, $genre, $this->user->userID)) ) {
+			if (! ($stmt->bind_param("sssssisi", $title, $summary, $MPAA, $actors, $director, $releaseYear, $genre, $this->user->userID)) ) {
 				$this->error = "Prepare failed: " . $this->mysqli->error;
 				return $this->error;
 
@@ -328,15 +328,15 @@ if($this->user->loginID == admin){
 			$summary = $data['summary'];
 
 			  if($this->user->loginID == admin){
-					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, genre=?  WHERE  id = ?");
+					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, MPAA=?, actors=?, director=?, releaseYear=?, summary=?, genre=?  WHERE  id = ?");
 
-				if (! ($stmt->bind_param("sssi", $title, $summary, $genre, $id)) ) {
+				if (! ($stmt->bind_param("sssssisi", $title, $summary, $MPAA, $actors, $director, $releaseYear, $genre, $id)) ) {
 							$this->error = "Prepare failed: " . $this->mysqli->error;
 							return $this->error;}
 				}else{
-					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, genre=? WHERE userID = ? AND id = ?");
+					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, MPAA=?, actors=?, director=?, releaseYear=?, genre=? WHERE userID = ? AND id = ?");
 
-				if (! ($stmt->bind_param("sssii", $title, $summary, $genre, $this->user->userID, $id)) ) {
+				if (! ($stmt->bind_param("sssssisii", $title, $summary, $MPAA, $actors, $director, $releaseYear, $genre, $this->user->userID, $id)) ) {
 							$this->error = "Prepare failed: " . $this->mysqli->error;
 							return $this->error;
 			}}
