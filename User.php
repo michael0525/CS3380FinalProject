@@ -9,6 +9,7 @@ class User {
 	public $loginID = '';
 	public $userID = 0;
 	public $hashedPassword = '';
+  public $userAccess = '';
 
 	public function load($loginID, $mysqli) {
 		$this->clear();
@@ -29,6 +30,7 @@ class User {
 				$this->loginID = $user['loginID'];
 				$this->userID = $user['id'];
 				$this->hashedPassword = $user['password'];
+				$this->userAccess = $user['userAccess'];
 			}
 			$result->close();
 			return true;
@@ -43,6 +45,7 @@ class User {
 		$loginID = '';
 		$userID = 0;
 		$hashedPassword = '';
+		$userAccess = '';
 	}
 }
 

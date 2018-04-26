@@ -145,15 +145,28 @@
 			$genre = '';
 			$title = '';
 			$summary = '';
+			$releaseYear = '';
+			$director = '';
+			$actors = '';
 			$selected = array('Action' => '', 'Comedy' => '', 'Drama' => '', 'Horror' => '', 'SciFi' => '', 'Western' => '', 'uncategorized' => '');
+
+			$selectedRating = array('G' => '', 'PG' => '', 'PG-13' => '', 'R' => '', 'NC-17' => '', 'not rated' => '');
 			if ($data) {
 				$genre = $data['genre'] ? $data['genre'] : 'uncategorized';
+				$MPAA = $data['MPAA'] ? $data['MPAA'] : 'not rated';
 				$title = $data['title'];
 				$summary = $data['summary'];
+				$releaseYear = $data['releaseYear'];
+				$director = $data['director'];
+				$actors = $data['actors'];
 				$selected[$genre] = 'selected';
-			} else {
-				$selected['uncategorized'] = 'selected';
-			}
+			  $selectedRating[$MPAA] = 'selected';
+								} else {
+										$selected['uncategorized'] = 'selected';
+										$selectedRating['not rated'] = 'selected';
+												}
+
+
 
 			$body = "<h1>Movies for {$user->firstName} {$user->lastName}</h1>\n";
 
@@ -183,11 +196,33 @@
   </select>
   </p>
 
+	<p>MPAA<br />
+	<select name="MPAA">
+		<option value="G" {$selectedRating['G']}>G</option>
+		<option value="PG" {$selectedRating['PG']}>PG</option>
+		<option value="PG-13" {$selectedRating['PG-13']}>PG-13</option>
+		<option value="R" {$selectedRating['R']}>R</option>
+		<option value="NC-17" {$selectedRating['NC-17']}>NC-17</option>
+		<option value="not rated" {$selectedRating['not rated']}>not rated</option>
+	</select>
+	</p>
+
   <p>Title<br />
   <input type="text" name="title" value="$title" placeholder="title" maxlength="255" size="80"></p>
 
-  <p>Description<br />
+	<p>Release Year<br />
+  <input type="number" name="releaseYear" value="$releaseYear" placeholder="Release Year" maxlength="255" size="80"></p>
+
+	<p>Director<br />
+	<input type="text" name="director" value="$director" placeholder="director" maxlength="255" size="80"></p>
+
+	<p>Actors<br />
+  <input type="text" name="actors" value="$actors" placeholder="actors" maxlength="255" size="80"></p>
+
+  <p>Summary<br />
   <textarea name="summary" rows="6" cols="80" placeholder="summary">$summary</textarea></p>
+
+
   <input type="submit" name='submit' value="Submit"> <input type="submit" name='cancel' value="Cancel">
 </form>
 EOT2;

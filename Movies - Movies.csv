@@ -1,5 +1,5 @@
 Movies,,,,,,
-Title,Genre,Rating,Year,Directors,Actors,Summary
+title,genre,MPAA,releaseYear,director,actors,summary
 Star Wars: Episode IV - A New Hope,SciFi,PG,1977,George Lucas,"Mark Hamill, Harrison Ford, Carrie Fisher","Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle-station while also attempting to rescue Princess Leia from the evil Darth Vader."
 Forest Gump,Drama,PG-13,1994,Robert Zemeckis,"Tom Hanks, Robin Wright, Gary Sinise","The presidencies of Kennedy and Johnson, Vietnam, Watergate, and other history unfold through the perspective of an Alabama man with an IQ of 75."
 Good Will Hunting,Drama,R,1997,Gus Van Sant,"Robin Williams, Matt Damon, Ben Affleck","Will Hunting, a janitor at M.I.T., has a gift for mathematics, but needs help from a psychologist to find direction in his life."

@@ -205,7 +205,7 @@ if($this->user->loginID == admin){
 				$this->error = "No id specified for movie to retrieve.";
 				return array($movie, $this->error);
 			}
-      if($this->user->loginID == admin){
+      if($this->user->userAccess == Admin){
 
 
 				$stmt = $this->mysqli->prepare("SELECT * FROM movies WHERE id = $id" );
@@ -245,6 +245,10 @@ if($this->user->loginID == admin){
 			$title = $data['title'];
 			$genre = $data['genre'];
 			$summary = $data['summary'];
+			$releaseYear = $data['releaseYear'];
+			$director = $data['director'];
+			$actors = $data['actors'];
+			$MPAA = $data['MPAA'];
 
 			if (! $title) {
 				$this->error = "No title found for movie to add. A title is required.";
@@ -255,9 +259,9 @@ if($this->user->loginID == admin){
 				$genre = 'uncategorized';
 			}
 
-			$stmt = $this->mysqli->prepare("INSERT INTO movies (title, summary, genre, userID) VALUES (?, ?, ?, ?)");
+			$stmt = $this->mysqli->prepare("INSERT INTO movies (title, summary, genre, director, actors, MPAA, releaseYear, userID) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)");
 
-			if (! ($stmt->bind_param("sssi", $title, $summary, $genre, $this->user->userID)) ) {
+			if (! ($stmt->bind_param("ssssssii", $title, $summary, $genre, $director, $actors, $MPAA, $releaseYear, $this->user->userID)) ) {
 				$this->error = "Prepare failed: " . $this->mysqli->error;
 				return $this->error;
 
@@ -296,20 +300,24 @@ if($this->user->loginID == admin){
 				$this->error = "No title found for movie to update. A title is required.";
 				return $this->error;
 			}
-			
+
 			$summary = $data['summary'];
 			$genre = $data['genre'];
+			$MPAA = $data['MPAA'];
+			$releaseYear = $data['releaseYear'];
+			$director = $data['director'];
+			$actors = $data['actors'];
 
-			  if($this->user->loginID == admin){
-					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, genre=?  WHERE  id = ?");
+			  if($this->user->userAccess == Admin){
+					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, genre=?, MPAA=?, director=?, actors=?, releaseYear=?  WHERE  id = ?");
 
-				if (! ($stmt->bind_param("sssi", $title, $summary, $genre, $id)) ) {
+				if (! ($stmt->bind_param("ssssssii", $title, $summary, $genre, $MPAA, $director, $actors, $releaseYear, $id)) ) {
 							$this->error = "Prepare failed: " . $this->mysqli->error;
 							return $this->error;}
 				}else{
-					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, genre=? WHERE userID = ? AND id = ?");
+					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, genre=?, MPAA=?, director=?, actors=?, releaseYear WHERE userID = ? AND id = ?");
 
-				if (! ($stmt->bind_param("sssii", $title, $summary, $genre, $this->user->userID, $id)) ) {
+				if (! ($stmt->bind_param("ssssssiii", $title, $summary, $genre, $MPAA, $director, $actors, $releaseYear, $this->user->userID, $id)) ) {
 							$this->error = "Prepare failed: " . $this->mysqli->error;
 							return $this->error;
 			}}
@@ -342,7 +350,7 @@ if($this->user->loginID == admin){
 				$this->error = "No id specified for movie to delete.";
 				return $this->error;
 			}
-        if($this->user->loginID == admin){
+        if($this->user->userAccess == Admin){
 					$stmt = $this->mysqli->prepare("DELETE FROM movies WHERE id = $id");
 				}else{
 			$stmt = $this->mysqli->prepare("DELETE FROM movies WHERE userID = ? AND id = ?");
