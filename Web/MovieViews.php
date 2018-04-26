@@ -158,7 +158,7 @@
 			$actor = '';
 			$summary = '';
 			$selectedRating = array('not rated' => '','G' => '', 'PG' => '', 'PG-13' => '', 'R' => '', 'NC-17' => '');
-			$selectedGenre = array('Action' => '', 'Comedy' => '', 'Drama' => '', 'Horror' => '', 'SciFi' => '', 'Western' => '', 'uncategorized' => '');
+			$selectedGenre = array('uncategorized' => '', 'Action' => '', 'Comedy' => '', 'Drama' => '', 'Horror' => '', 'SciFi' => '', 'Western' => '');
 			if ($data) {
 				$title = $data['title'];
 				$MPAA = $data['MPAA'] ? $data['MPAA'] : 'not rated';
@@ -167,9 +167,11 @@
 				$director = $data['director'] ? $data['director'] : '';
 				$actors = $data['actors'] ? $data['actors'] : '';
 				$summary = $data['summary'];
+				$selectedRating[$MPAA] = 'selectedRating';
 				$selectedGenre[$genre] = 'selectedGenre';
 			} else {
-				$selected['uncategorized'] = 'selectedGenre';
+				$selectedRating['not rated'] = 'selected';
+				$selectedGenre['uncategorized'] = 'selected';
 			}
 
 			if ($user->firstName != "" && $user->firstName != NULL) {
@@ -209,13 +211,13 @@
 
   <p>Genre<br />
   <select name="genre">
+		<option value="uncategorized" {$selectedGenre['uncategorized']}>uncategorized</option>
 	  <option value="Action" {$selectedGenre['Action']}>Action</option>
 	  <option value="Comedy" {$selectedGenre['Comedy']}>Comedy</option>
 	  <option value="Drama" {$selectedGenre['Drama']}>Drama</option>
 		<option value="Horror" {$selectedGenre['Horror']}>Horror</option>
 	  <option value="SciFi" {$selectedGenre['SciFi']}>SciFi</option>
 	  <option value="Western" {$selectedGenre['Western']}>Western</option>
-	  <option value="uncategorized" {$selectedGenre['uncategorized']}>uncategorized</option>
   </select>
   </p>
 
