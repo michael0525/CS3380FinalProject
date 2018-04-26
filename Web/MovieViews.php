@@ -167,8 +167,8 @@
 				$director = $data['director'] ? $data['director'] : '';
 				$actors = $data['actors'] ? $data['actors'] : '';
 				$summary = $data['summary'];
-				$selectedRating[$MPAA] = 'selectedRating';
-				$selectedGenre[$genre] = 'selectedGenre';
+				$selectedRating[$MPAA] = 'selected';
+				$selectedGenre[$genre] = 'selected';
 			} else {
 				$selectedRating['not rated'] = 'selected';
 				$selectedGenre['uncategorized'] = 'selected';
