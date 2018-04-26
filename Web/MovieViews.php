@@ -65,7 +65,7 @@
 				$title = $movie['title'];
 				$summary = ($movie['summary']) ? $movie['summary'] : '';
 				$genre = $movie['genre'];
-				$rating = $movie['MPAA'];
+				$MPAA = $movie['MPAA'];
 				$director = $movie['director'];
 				$actors = $movie['actors'];
 				$releaseYear = $movie['releaseYear'];
@@ -73,7 +73,7 @@
 				$body .= "<tr>";
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
-				$body .= "<td>$title</td><td>$rating</td><td>$genre</td><td>$releaseYear</td><td>$director</td><td>$actors</td><td>$summary</td>";
+				$body .= "<td>$title</td><td>$MPAA</td><td>$genre</td><td>$releaseYear</td><td>$director</td><td>$actors</td><td>$summary</td>";
 				$body .= "</tr>\n";
 			}
 			$body .= "</table>\n";
@@ -131,7 +131,7 @@
 				$title = $movie['title'];
 				$summary = ($movie['summary']) ? $movie['summary'] : '';
 				$genre = $movie['genre'];
-				$rating = $movie['MPAA'];
+				$MPAA = $movie['MPAA'];
 				$director = $movie['director'];
 				$actors = $movie['actors'];
 				$releaseYear = $movie['releaseYear'];
@@ -139,7 +139,7 @@
 				$body .= "<tr>";
 				// $body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
 				// $body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
-				$body .= "<td>$title</td><td>$rating</td><td>$genre</td><td>$releaseYear</td><td>$director</td><td>$actors</td><td>$summary</td>";
+				$body .= "<td>$title</td><td>$MPAA</td><td>$genre</td><td>$releaseYear</td><td>$director</td><td>$actors</td><td>$summary</td>";
 				$body .= "</tr>\n";
 			}
 			$body .= "</table>\n";
@@ -150,17 +150,26 @@
 
 
 		public function movieFormView($user, $data = null, $message = '') {
-			$genre = '';
 			$title = '';
+			$MPAA = '';
+			$genre = '';
+			$releaseYear = '';
+			$director = '';
+			$actor = '';
 			$summary = '';
-			$selected = array('Action' => '', 'Comedy' => '', 'Drama' => '', 'Horror' => '', 'SciFi' => '', 'Western' => '', 'uncategorized' => '');
+			$selectedRating = array('G' => '', 'PG' => '', 'PG-13' => '', 'R' => '', 'NC-17' => '');
+			$selectedGenre = array('Action' => '', 'Comedy' => '', 'Drama' => '', 'Horror' => '', 'SciFi' => '', 'Western' => '', 'uncategorized' => '');
 			if ($data) {
-				$genre = $data['genre'] ? $data['genre'] : 'uncategorized';
 				$title = $data['title'];
+				$MPAA = $data['MPAA'] ? $data['MPAA'] : 'not rated';
+				$genre = $data['genre'] ? $data['genre'] : 'uncategorized';
+				$releaseYear = $data['releaseYear'] ? $data['releaseYear'] : '';
+				$director = $data['director'] ? $data['director'] : '';
+				$actors = $data['actors'] ? $data['actors'] : '';
 				$summary = $data['summary'];
-				$selected[$genre] = 'selected';
+				$selectedGenre[$genre] = 'selectedGenre';
 			} else {
-				$selected['uncategorized'] = 'selected';
+				$selected['uncategorized'] = 'selectedGenre';
 			}
 
 			if ($user->firstName != "" && $user->firstName != NULL) {
@@ -188,24 +197,25 @@
 	<input type="text" name="title" value="$title" placeholder="title" maxlength="255" size="80"></p>
 
 	<p>Rating<br />
-	<select name="rating">
-		<option value="G" {$selected['G']}>G</option>
-		<option value="PG" {$selected['PG']}>PG</option>
-		<option value="PG-13" {$selected['PG-13']}>PG-13</option>
-		<option value="R" {$selected['R']}>R</option>
-		<option value="NC-17" {$selected['NC-17']}>NC-17</option>
+	<select name="MPAA">
+	<option value="not rated" {$selectedRating['not rated']}>not rated</option>
+		<option value="G" {$selectedRating['G']}>G</option>
+		<option value="PG" {$selectedRating['PG']}>PG</option>
+		<option value="PG-13" {$selectedRating['PG-13']}>PG-13</option>
+		<option value="R" {$selectedRating['R']}>R</option>
+		<option value="NC-17" {$selectedRating['NC-17']}>NC-17</option>
 	</select>
 	</p>
 
   <p>Genre<br />
   <select name="genre">
-	  <option value="Action" {$selected['Action']}>Action</option>
-	  <option value="Comedy" {$selected['Comedy']}>Comedy</option>
-	  <option value="Drama" {$selected['Drama']}>Drama</option>
-		<option value="Horror" {$selected['Horror']}>Horror</option>
-	  <option value="SciFi" {$selected['SciFi']}>SciFi</option>
-	  <option value="Western" {$selected['Western']}>Western</option>
-	  <option value="uncategorized" {$selected['uncategorized']}>uncategorized</option>
+	  <option value="Action" {$selectedGenre['Action']}>Action</option>
+	  <option value="Comedy" {$selectedGenre['Comedy']}>Comedy</option>
+	  <option value="Drama" {$selectedGenre['Drama']}>Drama</option>
+		<option value="Horror" {$selectedGenre['Horror']}>Horror</option>
+	  <option value="SciFi" {$selectedGenre['SciFi']}>SciFi</option>
+	  <option value="Western" {$selectedGenre['Western']}>Western</option>
+	  <option value="uncategorized" {$selectedGenre['uncategorized']}>uncategorized</option>
   </select>
   </p>
 

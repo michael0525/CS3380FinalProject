@@ -243,7 +243,11 @@ if($this->user->loginID == admin){
 			}
 
 			$title = $data['title'];
+			$MPAA = $data['MPAA'];
 			$genre = $data['genre'];
+			$releaseYear = $data['releaseYear'];
+			$director = $data['releaseYear'];
+			$actors = $data['actors'];
 			$summary = $data['summary'];
 
 			if (! $title) {
@@ -251,8 +255,27 @@ if($this->user->loginID == admin){
 				return $this->error;
 			}
 
+			if (! $MPAA) {
+				$MPAA = 'not rated';
+			}
+
 			if (! $genre) {
 				$genre = 'uncategorized';
+			}
+
+			if (! $releaseYear) {
+				$this->error = "No title found for movie to add. A title is required.";
+				return $this->error;
+			}
+
+			if (! $director) {
+				$this->error = "No director found for movie to add. A director is required.";
+				return $this->error;
+			}
+
+			if (! $actors) {
+				$this->error = "No actors found for movie to add. An actor is required.";
+				return $this->error;
 			}
 
 			$stmt = $this->mysqli->prepare("INSERT INTO movies (title, summary, genre, userID) VALUES (?, ?, ?, ?)");
@@ -296,9 +319,13 @@ if($this->user->loginID == admin){
 				$this->error = "No title found for movie to update. A title is required.";
 				return $this->error;
 			}
-			
+
+			$MPAA = $data['MPAA'] ? $data['MPAA'] : "not rated";
+			$genre = $data['genre'] ? $data['genre'] : "uncategorized";
+			$releaseYear = $data['releaseYear'];
+			$director = $data['director'];
+			$actors = $data['actors'];
 			$summary = $data['summary'];
-			$genre = $data['genre'];
 
 			  if($this->user->loginID == admin){
 					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, summary=?, genre=?  WHERE  id = ?");
