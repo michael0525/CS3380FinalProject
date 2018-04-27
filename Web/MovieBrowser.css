@@ -1,12 +1,21 @@
 /*Authors: Patrick Kunza (pskggc), Ryan Olson (raozp4), Chase Scanlan (cwswx7), Michael Yizhuo Du (ydypb), Jay Toebbon (ejtn78)
 Model-View-Controller implementation of Movie Browser */
 
+
+/*Beginning of our .CSS*/
 body {
+    position: absolute;
+    top: 12px;
 	margin: 10px;
-	background-color: #8ef;
+	background-color: #ccc;
 	font-family: arial;
 }
 
+h1{
+    text-align: center;
+    top:-1px;
+    right:600px;
+}
 table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
@@ -17,7 +26,7 @@ th, td {
 }
 
 th {
-	background-color: #6de;
+	background-color: #fff;
 }
 
 td {
@@ -26,20 +35,22 @@ td {
 
 a.movieButton:link, a.movieButton:visited, a.movieButton:active {
 	color: black;
-	font-size: 1.2em;
+	font-size: 1.3em;
 	text-decoration: none;
-	background-color: #6de;
+	background-color: #ccc;
 	padding: 5px;
-	border: 1px solid #4bc;
+	border: 1px solid #171515;
+    position: static;
 }
 
 a.movieButton:hover {
-	background-color: #5cd;
+	background-color: #ccc;
 }
 
 form {
-	background-color: #6de;
-	border: 1px solid #4bc;
+    position: static;
+    top: 150px;
+    text-align: center;
 	padding: 5px;
 }
 
