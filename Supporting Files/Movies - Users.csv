@@ -1,0 +1,7 @@
+ID,LoginID,Password,firstName,lastName,userAccess
+1,michael,$2y$10$DPSFjsA2OYUQ8N4G5cnYdeKVVv.921kXdy5QR3riiXKzt7tgJvpvK,Michael,Du,User 
+2,chase,$2y$10$DPSFjsA2OYUQ8N4G5cnYdeKVVv.921kXdy5QR3riiXKzt7tgJvpvK,Chase,Scanlan,User
+3,edward,$2y$10$DPSFjsA2OYUQ8N4G5cnYdeKVVv.921kXdy5QR3riiXKzt7tgJvpvK,Edward,Toebben,User
+4,patrick,$2y$10$DPSFjsA2OYUQ8N4G5cnYdeKVVv.921kXdy5QR3riiXKzt7tgJvpvK,Patrick,Kunza,User
+5,ryan,$2y$10$DPSFjsA2OYUQ8N4G5cnYdeKVVv.921kXdy5QR3riiXKzt7tgJvpvK,Ryan,Olson,User
+6,admin,$2y$10$DPSFjsA2OYUQ8N4G5cnYdeKVVv.921kXdy5QR3riiXKzt7tgJvpvK,Administrator,,Admin
