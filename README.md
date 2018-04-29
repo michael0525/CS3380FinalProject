@@ -1,7 +1,11 @@
 # CS3380FinalProject - Tigers Movie Database
 ## Authors: Patrick Kunza (pskggc), Ryan Olson (raozp4), Chase Scanlan (cwswx7), Michael Yizhuo Du (ydypb), Jay Toebbon (ejtn78)
-###  Tigers Movie Database is a database of movies and their information. The available information for each movie is as follows: Title, Genre, Rating, Year released, Director, Actors, Summary. 
-###  Tigers Movie Database supports guest access and user login access. For guest access, guest users can view all the movie information but cannot edit, add, or delete the information in the movie database. For user access, there are two kinds of user access: Admin (Administrator) and User (normal user). For Admin account, the user can view, edit, add and delete all movie information, including the movie that other users add to the movie database. For User accounts, the user can edit, add and delete the movie records that the user him/herself created before. A normal user cannot edit the movie record that other users created. 
+
+## Application Description:
+
+Tigers Movie Database is a database of movies and their information. The available information for each movie is as follows: Title, Genre, Rating, Year released, Director, Actors, Summary. 
+
+Tigers Movie Database supports guest access and user login access. For guest access, guest users can view all the movie information but cannot edit, add, or delete the information in the movie database. For user access, there are two kinds of user access: Admin (Administrator) and User (normal user). For Admin account, the user can view, edit, add and delete all movie information, including the movie that other users add to the movie database. For User accounts, the user can edit, add and delete the movie records that the user him/herself created before. A normal user cannot edit the movie record that other users created. 
 
 ## Schemas:   
 CREATE TABLE movie(
