@@ -29,6 +29,7 @@ class User {
 				$this->loginID = $user['loginID'];
 				$this->userID = $user['id'];
 				$this->hashedPassword = $user['password'];
+				$this->userAccess = $user['userAccess'];
 			}
 			$result->close();
 			return true;

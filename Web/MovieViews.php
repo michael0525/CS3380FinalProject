@@ -26,7 +26,7 @@
 				$body .= "<p class='message'>$message</p>\n";
 			}
 
-			$body .= "<p><a class='movieButton' href='index.php?view=movieform'>+ Add Movie</a> <a class='movieButton' href='index.php?logout=1'>Logout</a></p>\n";
+			$body .= "<p><a class='movieAddButton' href='index.php?view=movieform'>+ Add Movie</a> <a class='logoutButton' href='index.php?logout=1'>Logout</a></p>\n";
 
 			if (count($movies) < 1) {
 				$body .= "<p>No movies to display!</p>\n";

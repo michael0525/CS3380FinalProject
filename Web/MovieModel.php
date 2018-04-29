@@ -158,7 +158,7 @@
 			$orderDirectionEscaped = $this->mysqli->real_escape_string($this->orderDirection);
 
 
-if($this->user->loginID == admin){
+if($this->user->userAccess == Admin){
 
 			$stmt = $this->mysqli->prepare("SELECT * FROM movies ORDER BY $orderByEscaped $orderDirectionEscaped");
 		}else{
@@ -205,7 +205,7 @@ if($this->user->loginID == admin){
 				$this->error = "No id specified for movie to retrieve.";
 				return array($movie, $this->error);
 			}
-      if($this->user->loginID == admin){
+      if($this->user->userAccess == Admin){
 
 
 				$stmt = $this->mysqli->prepare("SELECT * FROM movies WHERE id = $id" );
@@ -246,7 +246,7 @@ if($this->user->loginID == admin){
 			$MPAA = $data['MPAA'];
 			$genre = $data['genre'];
 			$releaseYear = $data['releaseYear'];
-			$director = $data['releaseYear'];
+			$director = $data['director'];
 			$actors = $data['actors'];
 			$summary = $data['summary'];
 
@@ -263,8 +263,8 @@ if($this->user->loginID == admin){
 				$genre = 'uncategorized';
 			}
 
-			if (! $releaseYear) {
-				$this->error = "No title found for movie to add. A title is required.";
+			if (! $releaseYear || $releaseYear == 0) {
+				$this->error = "No Release Year found for movie to add. A Release Year is required.";
 				return $this->error;
 			}
 
@@ -315,11 +315,6 @@ if($this->user->loginID == admin){
 			}
 
 			$title = $data['title'];
-			if (! $title) {
-				$this->error = "No title found for movie to update. A title is required.";
-				return $this->error;
-			}
-
 			$MPAA = $data['MPAA'] ? $data['MPAA'] : "not rated";
 			$genre = $data['genre'] ? $data['genre'] : "uncategorized";
 			$releaseYear = $data['releaseYear'];
@@ -327,10 +322,39 @@ if($this->user->loginID == admin){
 			$actors = $data['actors'];
 			$summary = $data['summary'];
 
-			  if($this->user->loginID == admin){
+
+			if (! $title) {
+				$this->error = "No title found for movie to add. A title is required.";
+				return $this->error;
+			}
+
+			if (! $MPAA) {
+				$MPAA = 'not rated';
+			}
+
+			if (! $genre) {
+				$genre = 'uncategorized';
+			}
+
+			if (! $releaseYear || $releaseYear == 0) {
+				$this->error = "No Release Year found for movie to add. A Release Year is required.";
+				return $this->error;
+			}
+
+			if (! $director) {
+				$this->error = "No director found for movie to add. A director is required.";
+				return $this->error;
+			}
+
+			if (! $actors) {
+				$this->error = "No actors found for movie to add. An actor is required.";
+				return $this->error;
+			}
+
+			  if($this->user->userAccess== Admin){
 					$stmt = $this->mysqli->prepare("UPDATE movies SET title=?, MPAA=?, actors=?, director=?, releaseYear=?, summary=?, genre=?  WHERE  id = ?");
 
-				if (! ($stmt->bind_param("sssssisi", $title, $summary, $MPAA, $actors, $director, $releaseYear, $genre, $id)) ) {
+				if (! ($stmt->bind_param("ssssissi", $title, $MPAA, $actors, $director, $releaseYear, $summary, $genre, $id)) ) {
 							$this->error = "Prepare failed: " . $this->mysqli->error;
 							return $this->error;}
 				}else{

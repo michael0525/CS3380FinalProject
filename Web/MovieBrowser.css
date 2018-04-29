@@ -3,7 +3,7 @@ Model-View-Controller implementation of Movie Browser */
 
 body {
 	margin: 10px;
-	background-color: #8ef;
+	background-color: #e8cd47;
 	font-family: arial;
 }
 
@@ -17,29 +17,66 @@ th, td {
 }
 
 th {
-	background-color: #6de;
+	background-color: #ccc;
 }
 
 td {
 	background-color: #fff;
 }
 
+
+
 a.movieButton:link, a.movieButton:visited, a.movieButton:active {
 	color: black;
-	font-size: 1.2em;
+	font-size: 1.3em;
 	text-decoration: none;
-	background-color: #6de;
+	background-color: #ccc;
 	padding: 5px;
-	border: 1px solid #4bc;
+	border: 1px solid #171515;
+    position:absolute;
+    top:5px;
+    right:8px;
+}
+
+a.movieAddButton:link, a.movieAddButton:visited, a.movieAddButton:active {
+	color: black;
+	font-size: 1.3em;
+	text-decoration: none;
+	background-color: #ccc;
+	padding: 5px;
+	border: 1px solid #171515;
+  position:absolute;
+  top:5px;
+  right:100px;
+}
+
+a.logoutButton:link, a.logoutButton:visited, a.logoutButton:active {
+	color: black;
+	font-size: 1.3em;
+	text-decoration: none;
+	background-color: #ccc;
+	padding: 5px;
+	border: 1px solid #171515;
+    position:absolute;
+    top:5px;
+    right:8px;
 }
 
 a.movieButton:hover {
-	background-color: #5cd;
+	background-color: #9c8f8f;
+}
+
+a.movieAddButton:hover {
+	background-color: #9c8f8f;
+}
+
+a.logoutButton:hover {
+	background-color: #9c8f8f;
 }
 
 form {
-	background-color: #6de;
-	border: 1px solid #4bc;
+	background-color: #e8cd47;
+	border: 1px solid #171515;
 	padding: 5px;
 }
 
@@ -55,5 +92,5 @@ a.order:link, a.order:visited, a.order:active {
 }
 
 a.order:hover {
-	color: #aa4444;
+	color: #e8cd47;
 }
