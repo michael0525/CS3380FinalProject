@@ -11,7 +11,7 @@ body {
 
 table, th, td {
 	font-family: 'Ubuntu', serif;
-	color: #61892F;
+	color: #403F45;
 	border: 1px solid black;
 	border-collapse: collapse;
 }
@@ -25,7 +25,7 @@ th, td {
 }
 
 th {
-	background-color: #ccc;
+	background-color: #403F45;
 }
 
 td {
@@ -55,7 +55,7 @@ a.movieAddButton:link, a.movieAddButton:visited, a.movieAddButton:active {
 	border: 1px solid #171515;
   position:absolute;
   top:5px;
-  right:100px;
+  right:110px;
 }
 
 a.logoutButton:link, a.logoutButton:visited, a.logoutButton:active {
@@ -71,15 +71,15 @@ a.logoutButton:link, a.logoutButton:visited, a.logoutButton:active {
 }
 
 a.movieButton:hover {
-	background-color: #9c8f8f;
+	background-color: #e3e1d3;
 }
 
 a.movieAddButton:hover {
-	background-color: #9c8f8f;
+	background-color: #e3e1d3;
 }
 
 a.logoutButton:hover {
-	background-color: #9c8f8f;
+	background-color: #e3e1d3;
 }
 
 form {
@@ -95,7 +95,7 @@ p.message {
 }
 
 a.order:link, a.order:visited, a.order:active {
-	color: black;
+	color: #E6CE1D;
 	text-decoration: none;
 }
 

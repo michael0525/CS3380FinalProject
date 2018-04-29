@@ -281,6 +281,7 @@ EOT;
 <head>
 <title>{$this->pageTitle}</title>
 <link rel="stylesheet" type="text/css" href="{$this->stylesheet}">
+<img src="https://i.pinimg.com/736x/a6/15/50/a6155006f78e6943cd2ae7b418d1c157--tigers.jpg" style="float: left;width: 100px;position: absolute;height: 100px;top: -2px;left: 10px;">
 </head>
 <body>
 $body
