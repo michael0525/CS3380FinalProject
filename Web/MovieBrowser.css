@@ -1,15 +1,23 @@
 /*Authors: Patrick Kunza (pskggc), Ryan Olson (raozp4), Chase Scanlan (cwswx7), Michael Yizhuo Du (ydypb), Jay Toebbon (ejtn78)
 Model-View-Controller implementation of Movie Browser */
+@import url('http://fonts.googleapis.com/css?family=Ubuntu');
 
 body {
+	font-family: 'Ubuntu', Serif;
+	font-size: 20px; 
 	margin: 10px;
 	background-color: #e8cd47;
-	font-family: arial;
 }
 
 table, th, td {
+	font-family: 'Ubuntu', serif;
+	color: #61892F;
 	border: 1px solid black;
 	border-collapse: collapse;
+}
+
+h1{
+	text-align: center;
 }
 
 th, td {
