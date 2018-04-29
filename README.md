@@ -33,7 +33,7 @@ CREATE TABLE users (
 
 ## Entity Relationship Diagram for Tigers Movie Database:
 
-The ERD for Tigers Movie Database is located in the folder "Supporting Files".
+The ERD for Tigers Movie Database is located in the folder "Supporting Files". The file is "ERD for Tigers Movie Database.png".
 
 ## Explanation of CRUD in Tiger Movie Database:
 
