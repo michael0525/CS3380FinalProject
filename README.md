@@ -3,7 +3,7 @@
 
 ## Application Description:
 
-Tigers Movie Database is a database of movies and their information. The available information for each movie is as follows: Title, Genre, Rating, Year released, Director, Actors, Summary. 
+Tigers Movie Database is a database of movies and their information. The available information for each movie is as follows: Title, Genre, Rating, Year released, Director, Actors, Summary. The movie list can be sorted by any column of the schema. 
 
 Tigers Movie Database supports guest access and user login access. For guest access, guest users can view all the movie information but cannot edit, add, or delete the information in the movie database. For user access, there are two kinds of user access: Admin (Administrator) and User (normal user). For Admin account, the user can view, edit, add and delete all movie information, including the movie that other users add to the movie database. For User accounts, the user can edit, add and delete the movie records that the user him/herself created before. A normal user cannot edit the movie record that other users created. 
 
@@ -47,7 +47,7 @@ Delete: Admin account and User accounts can delete movie records into the databa
 
 ## Video demostration for Tigers Movie Database Web Application:
 
-https://youtu.be/3YoBjfjeKF4
+https://youtu.be/lbHfX-Z-SnY
 
 
 
